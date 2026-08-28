@@ -4,26 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JEPRIS-P AI &mdash; Build What You Need</title>
-<meta name="description" content="Websites, software, and automation, built and shipped directly by Jefrey Raj & Priyanka. Message us on WhatsApp.">
+<meta name="description" content="Websites, software, dashboards, and automation, built and shipped directly by Jefrey Raj & Priyanka. Message us on WhatsApp.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root {
-    --bg: #EDF1F4;
-    --surface: #FFFFFF;
-    --surface-alt: #E3E9EE;
-    --ink: #16212C;
-    --ink-soft: #56646F;
-    --line: #CBD4DB;
-    --accent: #C9631A;
-    --accent-ink: #FFFFFF;
-    --accent-soft: #F3E1CC;
+    --bg: #EDF1F4; --surface: #FFFFFF; --surface-alt: #E3E9EE;
+    --ink: #16212C; --ink-soft: #56646F; --line: #CBD4DB;
+    --accent: #C9631A; --accent-ink: #FFFFFF; --accent-soft: #F3E1CC;
     --status-good: #2F7D4F;
-    --band-bg: #16212C;
-    --band-ink: #EDF1F4;
-    --band-soft: #95A2AD;
-    --band-line: rgba(237, 241, 244, 0.14);
-    --band-accent: #E8944F;
-    --band-accent-ink: #1A1006;
+    --band-bg: #16212C; --band-ink: #EDF1F4; --band-soft: #95A2AD;
+    --band-line: rgba(237, 241, 244, 0.14); --band-accent: #E8944F; --band-accent-ink: #1A1006;
     --shadow: 0 1px 2px rgba(15,23,31,0.05), 0 16px 32px -20px rgba(15,23,31,0.22);
     --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
     --font-body: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
@@ -54,19 +44,12 @@
   a { color: inherit; }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
   html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
   .wrap { max-width: 880px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 48px); }
-  section, footer.band { padding: clamp(48px, 9vw, 92px) 0; }
+  section, footer.band { padding: clamp(44px, 8vw, 84px) 0; }
 
   .band {
-    background: var(--band-bg);
-    color: var(--band-ink);
+    background: var(--band-bg); color: var(--band-ink);
     background-image:
       repeating-linear-gradient(0deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px),
       repeating-linear-gradient(90deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px);
@@ -86,13 +69,10 @@
   h1, h2 { font-family: var(--font-display); font-weight: 800; text-wrap: balance; margin: 0; }
 
   /* ---------- hero ---------- */
-  .hero-name { font-size: clamp(42px, 8vw, 72px); line-height: 0.98; letter-spacing: -0.005em; }
+  .hero-name { font-size: clamp(40px, 7.5vw, 68px); line-height: 0.98; letter-spacing: -0.005em; }
   .hero-name .line2 { color: var(--band-accent); }
-  .hero-sub {
-    font-size: clamp(17px, 2.2vw, 19px); line-height: 1.55; color: var(--band-soft);
-    max-width: 44ch; margin: 22px 0 0;
-  }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .hero-sub { font-size: clamp(16.5px, 2.1vw, 18.5px); line-height: 1.55; color: var(--band-soft); max-width: 46ch; margin: 20px 0 0; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
   .btn-primary, .btn-ghost {
     display: inline-flex; align-items: center; gap: 8px;
     font-family: var(--font-mono); font-size: 14px; font-weight: 500;
@@ -104,64 +84,70 @@
   .btn-ghost { background: transparent; color: var(--band-ink); border-color: var(--band-line); }
   .btn-ghost:hover { border-color: var(--band-soft); }
 
-  .pipeline { margin-top: clamp(40px, 7vw, 64px); border-top: 1px solid var(--band-line); padding-top: 28px; }
-  .pipeline-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--band-soft); margin-bottom: 18px; }
-  .pipeline-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  .pipeline-step .num { font-family: var(--font-mono); font-size: 12px; color: var(--band-accent); }
-  .pipeline-step .label { font-family: var(--font-body); font-weight: 700; font-size: 14.5px; margin: 6px 0 3px; }
-  .pipeline-step .desc { font-size: 12.5px; color: var(--band-soft); line-height: 1.4; }
-  .pipeline-outcome { margin-top: 22px; font-family: var(--font-mono); font-size: 12.5px; color: var(--band-soft); }
-  .pipeline-outcome b { color: var(--band-ink); font-weight: 500; }
+  .strengths { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .strengths li { display: flex; align-items: baseline; gap: 10px; font-size: 14px; color: var(--band-soft); }
+  .strengths li::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--status-good); flex: none; transform: translateY(-2px); }
+
+  /* ---------- quick preview strip ---------- */
+  .preview-strip { border-top: 1px solid var(--band-line); margin-top: clamp(36px, 6vw, 56px); padding-top: 28px; }
+  .preview-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--band-soft); margin-bottom: 18px; }
+  .preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .preview-item .t { font-family: var(--font-body); font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+  .preview-item .d { font-size: 13px; color: var(--band-soft); line-height: 1.4; }
+
+  /* ---------- quick facts ---------- */
+  .quickfacts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .qf-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .qf-value { font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); }
 
   /* ---------- section heads ---------- */
-  .section-head { max-width: 50ch; margin-bottom: clamp(28px, 5vw, 44px); }
-  .section-head h2 { font-size: clamp(26px, 4.2vw, 38px); line-height: 1.06; }
-  .section-head p { font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); max-width: 56ch; margin: 14px 0 0; }
+  .section-head { max-width: 56ch; margin-bottom: clamp(26px, 5vw, 40px); }
+  .section-head h2 { font-size: clamp(25px, 4vw, 36px); line-height: 1.08; }
+  .section-head p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); max-width: 58ch; margin: 12px 0 0; }
   .band .section-head p { color: var(--band-soft); }
 
-  /* ---------- pillars ---------- */
-  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-  .pillar-card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
-    padding: clamp(20px, 2.6vw, 26px); box-shadow: var(--shadow);
-    display: flex; flex-direction: column; gap: 10px;
-  }
-  .pillar-top { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
-  .pillar-top .n { color: var(--ink-soft); }
-  .pillar-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2.6vw, 24px); line-height: 1.05; }
-  .pillar-desc { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
-  .pillar-link {
-    align-self: flex-start; font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
-    color: var(--accent); text-decoration: none; margin-top: 4px;
-    border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
-  }
-  .pillar-link:hover { border-bottom-color: var(--accent); }
+  /* ---------- detailed services ---------- */
+  .service-list { display: flex; flex-direction: column; gap: 16px; }
+  .service-card { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: clamp(20px, 3vw, 28px); box-shadow: var(--shadow); }
+  .service-top { display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px; }
+  .service-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); }
+  .service-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(19px, 2.6vw, 23px); }
+  .service-desc { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 14px; max-width: 62ch; }
+  .service-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .service-bullets li { display: flex; gap: 9px; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); }
+  .service-bullets li::before { content: "\2192"; color: var(--accent); flex: none; }
 
-  /* ---------- audience ---------- */
-  .audience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .audience-card { border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; background: var(--surface); }
-  .audience-card .label { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-  .audience-card p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); }
+  /* ---------- process ---------- */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .process-card .num { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
+  .process-card .label { font-family: var(--font-display); font-weight: 700; font-size: 19px; margin: 6px 0 6px; }
+  .process-card p { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
 
-  /* ---------- tag cloud ---------- */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
-  .tag-chip { font-family: var(--font-mono); font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; }
-  .tag-note { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin-top: 18px; }
+  /* ---------- why cards ---------- */
+  .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .why-card { border: 1px solid var(--line); border-radius: 8px; padding: 20px 22px; background: var(--surface); }
+  .why-card .label { font-family: var(--font-body); font-weight: 700; font-size: 15.5px; margin-bottom: 6px; }
+  .why-card p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-soft); }
 
-  /* ---------- why tags ---------- */
-  .why-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-  .why-chip { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--band-accent); background: transparent; border: 1px solid color-mix(in srgb, var(--band-accent) 45%, var(--band-line)); border-radius: 999px; padding: 8px 16px; }
+  /* ---------- about ---------- */
+  .about-lede { font-size: clamp(16.5px, 2.1vw, 18.5px); line-height: 1.65; max-width: 62ch; margin: 0 0 28px; }
+  .fit-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 24px; }
+  .fit-list li { display: flex; gap: 9px; font-size: 14.5px; color: var(--ink); }
+  .fit-list li::before { content: ""; width: 6px; height: 6px; margin-top: 7px; border-radius: 2px; background: var(--accent); flex: none; }
+  .fit-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin: 30px 0 12px; }
 
-  /* ---------- footer / close ---------- */
-  .close-block h2 { font-size: clamp(30px, 5vw, 44px); line-height: 1.05; }
-  .close-block p { font-size: 17px; line-height: 1.6; color: var(--band-soft); max-width: 48ch; margin: 14px 0 0; }
-  .footer-rule { border: none; border-top: 1px solid var(--band-line); margin: clamp(40px, 7vw, 60px) 0 22px; }
+  /* ---------- close / footer ---------- */
+  .close-block h2 { font-size: clamp(28px, 4.8vw, 42px); line-height: 1.05; }
+  .close-block p { font-size: 16.5px; line-height: 1.6; color: var(--band-soft); max-width: 48ch; margin: 14px 0 0; }
+  .footer-rule { border: none; border-top: 1px solid var(--band-line); margin: clamp(36px, 6vw, 52px) 0 20px; }
   .footer-line { font-family: var(--font-mono); font-size: 11.5px; color: var(--band-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 
-  @media (max-width: 720px) {
-    .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
-    .pillars { grid-template-columns: 1fr; }
-    .audience-grid { grid-template-columns: 1fr; }
+  @media (max-width: 760px) {
+    .preview-grid, .process-grid, .quickfacts { grid-template-columns: 1fr 1fr; }
+    .why-grid, .fit-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .preview-grid, .process-grid, .quickfacts { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -181,42 +167,47 @@
       <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20page%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message on WhatsApp &rarr;</a>
       <a class="btn-ghost" href="/">See our work</a>
     </div>
+    <ul class="strengths">
+      <li>Real systems, not mockups</li>
+      <li>Built by the people who use them</li>
+      <li>Direct access, fast turnaround</li>
+    </ul>
 
-    <div class="pipeline">
-      <div class="pipeline-eyebrow">Build Pipeline</div>
-      <div class="pipeline-steps">
-        <div class="pipeline-step">
-          <div class="num">01</div>
-          <div class="label">Talk</div>
-          <div class="desc">Tell us what you need</div>
+    <div class="preview-strip">
+      <div class="preview-eyebrow">Where we help most</div>
+      <div class="preview-grid">
+        <div class="preview-item">
+          <div class="t">Websites</div>
+          <div class="d">Fast, custom sites built to convert.</div>
         </div>
-        <div class="pipeline-step">
-          <div class="num">02</div>
-          <div class="label">Build</div>
-          <div class="desc">We design &amp; build it</div>
+        <div class="preview-item">
+          <div class="t">Software</div>
+          <div class="d">Internal tools that fit how you work.</div>
         </div>
-        <div class="pipeline-step">
-          <div class="num">03</div>
-          <div class="label">Launch</div>
-          <div class="desc">It goes live, fast</div>
-        </div>
-        <div class="pipeline-step">
-          <div class="num">04</div>
-          <div class="label">Automate</div>
-          <div class="desc">We wire up the busywork</div>
+        <div class="preview-item">
+          <div class="t">Automation</div>
+          <div class="d">The busywork, handled for you.</div>
         </div>
       </div>
-      <div class="pipeline-outcome">Outcome &mdash; <b>a system that runs itself.</b></div>
     </div>
   </div>
 </section>
 
 <section>
   <div class="wrap">
-    <div class="section-head" style="text-align:center; margin-left:auto; margin-right:auto;">
-      <div class="eyebrow" style="justify-content:center;">One Team</div>
-      <h2>Everything you need to ship, under one roof.</h2>
-      <p style="margin-left:auto; margin-right:auto;">Built by two people who design, build, and automate &mdash; not a queue of specialists passed between departments.</p>
+    <div class="quickfacts">
+      <div>
+        <div class="qf-label">Built for</div>
+        <div class="qf-value">Small businesses, churches, IT teams, founders</div>
+      </div>
+      <div>
+        <div class="qf-label">Work includes</div>
+        <div class="qf-value">Websites, dashboards, internal tools, automation</div>
+      </div>
+      <div>
+        <div class="qf-label">Approach</div>
+        <div class="qf-value">Direct, fast, production-grade</div>
+      </div>
     </div>
   </div>
 </section>
@@ -224,64 +215,37 @@
 <section class="tint">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">What we build</div>
-      <h2>Three ways we help you ship.</h2>
+      <div class="eyebrow">Core services</div>
+      <h2>What we help you build</h2>
+      <p>From a first website to the automation that runs behind it, we handle the whole thing directly &mdash; not handed off between specialists.</p>
     </div>
-    <div class="pillars">
-      <div class="pillar-card">
-        <div class="pillar-top"><span class="n">01</span><span>Web &middot; Build</span></div>
-        <div class="pillar-name">JEPRIS-P Sites</div>
-        <p class="pillar-desc">Custom websites and landing pages, built fast and made to actually convert.</p>
-        <a class="pillar-link" href="https://wa.me/919789035749?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20a%20website." target="_blank" rel="noopener noreferrer">Start a site &rarr;</a>
+    <div class="service-list">
+      <div class="service-card">
+        <div class="service-top"><span class="service-num">01</span><span class="service-name">Websites &amp; Landing Pages</span></div>
+        <p class="service-desc">Custom-built sites that load fast and are easy for you to update &mdash; no bloated page builders, no generic templates.</p>
+        <ul class="service-bullets">
+          <li>Custom design, not templates</li>
+          <li>Fast load times</li>
+          <li>Built to convert visitors into messages</li>
+        </ul>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-top"><span class="n">02</span><span>Software &middot; Create</span></div>
-        <div class="pillar-name">JEPRIS-P Software</div>
-        <p class="pillar-desc">Internal tools and dashboards, built around how your team actually works.</p>
-        <a class="pillar-link" href="https://wa.me/919789035749?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20some%20software." target="_blank" rel="noopener noreferrer">Build with us &rarr;</a>
+      <div class="service-card">
+        <div class="service-top"><span class="service-num">02</span><span class="service-name">Software &amp; Dashboards</span></div>
+        <p class="service-desc">Internal tools and real-time dashboards, built around how your team actually works.</p>
+        <ul class="service-bullets">
+          <li>Real-time monitoring &amp; alerts</li>
+          <li>Built around your workflow</li>
+          <li>Shipped: Linux Server Health Dashboard, Church Member Management System</li>
+        </ul>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-top"><span class="n">03</span><span>Automation &middot; Automate</span></div>
-        <div class="pillar-name">JEPRIS-P Automation</div>
-        <p class="pillar-desc">Bots and workflows that handle the repetitive stuff automatically.</p>
-        <a class="pillar-link" href="https://wa.me/919789035749?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20automation." target="_blank" rel="noopener noreferrer">Automate with us &rarr;</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">The JEPRIS-P idea</div>
-      <h2>Good software isn't handed off. It's built with you.</h2>
-      <p>We believe real results come from direct access to the people actually building &mdash; not a support ticket, not a project manager relaying messages, not a queue.</p>
-    </div>
-  </div>
-</section>
-
-<section class="tint">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">Who we help</div>
-      <h2>Built for people who need it done.</h2>
-    </div>
-    <div class="audience-grid">
-      <div class="audience-card">
-        <div class="label">Small Businesses</div>
-        <p>A website or system that finally fits how you work.</p>
-      </div>
-      <div class="audience-card">
-        <div class="label">Churches &amp; Communities</div>
-        <p>Member management and broadcast messaging, without needing an IT team.</p>
-      </div>
-      <div class="audience-card">
-        <div class="label">IT &amp; Ops Teams</div>
-        <p>Dashboards and monitoring for the infrastructure you already run.</p>
-      </div>
-      <div class="audience-card">
-        <div class="label">Founders &amp; Teams</div>
-        <p>The internal tool you've been meaning to build.</p>
+      <div class="service-card">
+        <div class="service-top"><span class="service-num">03</span><span class="service-name">Automation &amp; Integrations</span></div>
+        <p class="service-desc">Bots, workflows, and messaging integrations that handle the repetitive stuff automatically.</p>
+        <ul class="service-bullets">
+          <li>WhatsApp broadcast &amp; messaging</li>
+          <li>Workflow &amp; task automation</li>
+          <li>Shipped: self-hosted Remote Desk tool</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -290,21 +254,31 @@
 <section>
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">Services</div>
-      <h2>What can we build you?</h2>
+      <div class="eyebrow">How we work</div>
+      <h2>A clear process, start to finish.</h2>
     </div>
-    <div class="tag-cloud">
-      <span class="tag-chip">Websites</span>
-      <span class="tag-chip">Landing Pages</span>
-      <span class="tag-chip">Dashboards</span>
-      <span class="tag-chip">Internal Software</span>
-      <span class="tag-chip">Automation Bots</span>
-      <span class="tag-chip">Server Monitoring</span>
-      <span class="tag-chip">Remote Access Tools</span>
-      <span class="tag-chip">WhatsApp Integrations</span>
-      <span class="tag-chip">AI Workflows</span>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="num">01</div>
+        <div class="label">Talk</div>
+        <p>Tell us what you're trying to solve. No forms, no sales calls &mdash; just a WhatsApp conversation.</p>
+      </div>
+      <div class="process-card">
+        <div class="num">02</div>
+        <div class="label">Build</div>
+        <p>We design and build it directly &mdash; the same two people, start to finish.</p>
+      </div>
+      <div class="process-card">
+        <div class="num">03</div>
+        <div class="label">Launch</div>
+        <p>It goes live, fast. You see progress in days, not months.</p>
+      </div>
+      <div class="process-card">
+        <div class="num">04</div>
+        <div class="label">Automate</div>
+        <p>We wire up the busywork around it, so it keeps running without you chasing it.</p>
+      </div>
     </div>
-    <div class="tag-note">More, as JEPRIS-P AI grows.</div>
   </div>
 </section>
 
@@ -313,14 +287,40 @@
     <div class="section-head">
       <div class="eyebrow">Why JEPRIS-P AI</div>
       <h2>Not just another freelancer queue.</h2>
-      <p>We connect design, engineering, and automation under one roof &mdash; built and run by the same two people, start to finish.</p>
     </div>
-    <div class="why-tags">
-      <span class="why-chip">Direct</span>
-      <span class="why-chip">Production-Grade</span>
-      <span class="why-chip">Fast Turnaround</span>
-      <span class="why-chip">No Middlemen</span>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="label">Direct</div>
+        <p>You talk to the people building it &mdash; no account managers, no relay.</p>
+      </div>
+      <div class="why-card">
+        <div class="label">Production-Grade</div>
+        <p>Every project on our site is a real system running today, not a mockup.</p>
+      </div>
+      <div class="why-card">
+        <div class="label">Fast Turnaround</div>
+        <p>Conversations happen over WhatsApp. Decisions happen fast.</p>
+      </div>
+      <div class="why-card">
+        <div class="label">No Middlemen</div>
+        <p>Two people, start to finish &mdash; design, build, and automation under one roof.</p>
+      </div>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">About JEPRIS-P AI</div>
+    <h2 style="font-size:clamp(25px,4vw,36px); line-height:1.08; max-width:24ch;">Built by two people who actually build it.</h2>
+    <p class="about-lede" style="margin-top:16px;">JEPRIS-P AI is Jefrey Raj and Priyanka &mdash; Process &amp; Automation Intelligence. We work directly with you, from the first WhatsApp message to the system going live and staying live. No handoffs, no account managers, no queue.</p>
+    <div class="fit-label">Best fit for</div>
+    <ul class="fit-list">
+      <li>Small business websites</li>
+      <li>Internal dashboards &amp; tools</li>
+      <li>Church &amp; community management systems</li>
+      <li>Workflow &amp; messaging automation</li>
+    </ul>
   </div>
 </section>
 

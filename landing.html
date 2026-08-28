@@ -117,6 +117,14 @@
   .service-bullets li { display: flex; gap: 9px; font-family: var(--font-mono); font-size: 12.5px; color: var(--ink); }
   .service-bullets li::before { content: "\2192"; color: var(--accent); flex: none; }
 
+  /* ---------- capability groups ---------- */
+  .capability-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .capability-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: clamp(18px, 2.6vw, 24px); }
+  .capability-card h3 { font-family: var(--font-body); font-weight: 700; font-size: 15px; margin: 0 0 12px; }
+  .capability-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .capability-card li { display: flex; gap: 9px; font-size: 13.5px; line-height: 1.4; color: var(--ink-soft); }
+  .capability-card li::before { content: "\2192"; color: var(--accent); flex: none; }
+
   /* ---------- process ---------- */
   .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .process-card .num { font-family: var(--font-mono); font-size: 12px; color: var(--accent); }
@@ -144,7 +152,7 @@
 
   @media (max-width: 760px) {
     .preview-grid, .process-grid, .quickfacts { grid-template-columns: 1fr 1fr; }
-    .why-grid, .fit-list { grid-template-columns: 1fr; }
+    .why-grid, .fit-list, .capability-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
     .preview-grid, .process-grid, .quickfacts { grid-template-columns: 1fr; }
@@ -245,6 +253,62 @@
           <li>WhatsApp broadcast &amp; messaging</li>
           <li>Workflow &amp; task automation</li>
           <li>Shipped: self-hosted Remote Desk tool</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">AI &amp; Engineering</div>
+      <h2>For teams that need the deeper stuff.</h2>
+      <p>Beyond a website or a dashboard &mdash; the AI engineering, data infrastructure, and automation work behind serious systems.</p>
+    </div>
+    <div class="capability-grid">
+      <div class="capability-card">
+        <h3>Process &amp; Data Automation</h3>
+        <ul>
+          <li>Process &amp; Workflow Automation</li>
+          <li>Custom Web Scraping &amp; Data Extraction Bots</li>
+          <li>Enterprise API &amp; Integration Engineering</li>
+          <li>Document Intelligence &amp; Automated Parsing</li>
+        </ul>
+      </div>
+      <div class="capability-card">
+        <h3>Database &amp; Cloud Architecture</h3>
+        <ul>
+          <li>Database &amp; Cloud Architecture</li>
+          <li>Database Optimization &amp; Migration Services</li>
+          <li>Cloud Infrastructure &amp; Serverless Deployment</li>
+        </ul>
+      </div>
+      <div class="capability-card">
+        <h3>Artificial Intelligence &amp; Analytics</h3>
+        <ul>
+          <li>Artificial Intelligence &amp; Analytics</li>
+          <li>Agentic AI &amp; Custom Autonomous Agents</li>
+          <li>Generative AI &amp; LLM Integration</li>
+          <li>Predictive Analytics &amp; Real-Time Dashboards</li>
+        </ul>
+      </div>
+      <div class="capability-card">
+        <h3>Custom Software &amp; Web Engineering</h3>
+        <ul>
+          <li>Custom Software &amp; Web Engineering</li>
+          <li>Tailored Web Applications &amp; Portals</li>
+          <li>DevOps &amp; CI/CD Pipeline Automation</li>
+        </ul>
+      </div>
+      <div class="capability-card">
+        <h3>LLM Engineering &amp; Optimization</h3>
+        <ul>
+          <li>LLM Configuration &amp; Optimization</li>
+          <li>Custom Model Fine-Tuning</li>
+          <li>Prompt Engineering &amp; System Instructions</li>
+          <li>RAG Architecture &amp; Vector Database Setup</li>
+          <li>Model Performance Tuning &amp; Evaluation</li>
         </ul>
       </div>
     </div>

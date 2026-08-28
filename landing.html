@@ -3,17 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JEPRIS-P AI &mdash; Let's Build It</title>
-<meta name="description" content="Websites, software, dashboards, and automation, built directly by Jefrey Raj & Priyanka. Message us on WhatsApp.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<title>JEPRIS-P AI &mdash; Build What You Need</title>
+<meta name="description" content="Websites, software, and automation, built and shipped directly by Jefrey Raj & Priyanka. Message us on WhatsApp.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root {
     --bg: #EDF1F4;
     --surface: #FFFFFF;
+    --surface-alt: #E3E9EE;
     --ink: #16212C;
     --ink-soft: #56646F;
     --line: #CBD4DB;
     --accent: #C9631A;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #F3E1CC;
     --status-good: #2F7D4F;
     --band-bg: #16212C;
     --band-ink: #EDF1F4;
@@ -21,42 +24,30 @@
     --band-line: rgba(237, 241, 244, 0.14);
     --band-accent: #E8944F;
     --band-accent-ink: #1A1006;
+    --shadow: 0 1px 2px rgba(15,23,31,0.05), 0 16px 32px -20px rgba(15,23,31,0.22);
     --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
     --font-body: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
   }
-
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #10161D;
-      --surface: #161F29;
-      --ink: #E7ECF0;
-      --ink-soft: #93A1AC;
-      --line: #2A3744;
-      --accent: #E8944F;
+      --bg: #10161D; --surface: #161F29; --surface-alt: #1D2733;
+      --ink: #E7ECF0; --ink-soft: #93A1AC; --line: #2A3744;
+      --accent: #E8944F; --accent-ink: #1A1006; --accent-soft: #3A2917;
       --status-good: #4FAE72;
-      --band-bg: #E7ECF0;
-      --band-ink: #10161D;
-      --band-soft: #69747E;
-      --band-line: rgba(16, 22, 29, 0.14);
-      --band-accent: #C9631A;
-      --band-accent-ink: #FFFFFF;
+      --band-bg: #E7ECF0; --band-ink: #10161D; --band-soft: #69747E;
+      --band-line: rgba(16, 22, 29, 0.14); --band-accent: #C9631A; --band-accent-ink: #FFFFFF;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 16px 32px -20px rgba(0,0,0,0.5);
     }
   }
   :root[data-theme="dark"] {
-    --bg: #10161D;
-    --surface: #161F29;
-    --ink: #E7ECF0;
-    --ink-soft: #93A1AC;
-    --line: #2A3744;
-    --accent: #E8944F;
+    --bg: #10161D; --surface: #161F29; --surface-alt: #1D2733;
+    --ink: #E7ECF0; --ink-soft: #93A1AC; --line: #2A3744;
+    --accent: #E8944F; --accent-ink: #1A1006; --accent-soft: #3A2917;
     --status-good: #4FAE72;
-    --band-bg: #E7ECF0;
-    --band-ink: #10161D;
-    --band-soft: #69747E;
-    --band-line: rgba(16, 22, 29, 0.14);
-    --band-accent: #C9631A;
-    --band-accent-ink: #FFFFFF;
+    --band-bg: #E7ECF0; --band-ink: #10161D; --band-soft: #69747E;
+    --band-line: rgba(16, 22, 29, 0.14); --band-accent: #C9631A; --band-accent-ink: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 16px 32px -20px rgba(0,0,0,0.5);
   }
 
   * { box-sizing: border-box; }
@@ -64,16 +55,14 @@
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
   html, body { margin: 0; padding: 0; }
   body {
-    min-height: 100vh;
     background: var(--bg);
     color: var(--ink);
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
-    display: flex;
-    flex-direction: column;
+    overflow-x: hidden;
   }
-
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 48px); width: 100%; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 48px); }
+  section, footer.band { padding: clamp(48px, 9vw, 92px) 0; }
 
   .band {
     background: var(--band-bg);
@@ -82,131 +71,97 @@
       repeating-linear-gradient(0deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px),
       repeating-linear-gradient(90deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px);
   }
+  .tint { background: var(--surface-alt); }
 
   .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--band-soft);
-    margin: 0 0 20px;
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft);
+    margin: 0 0 16px;
   }
-  .eyebrow::before { content: ""; width: 14px; height: 2px; background: var(--band-accent); display: inline-block; flex: none; }
+  .band .eyebrow { color: var(--band-soft); }
+  .eyebrow::before { content: ""; width: 14px; height: 2px; background: var(--accent); display: inline-block; flex: none; }
+  .band .eyebrow::before { background: var(--band-accent); }
 
-  .hero {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: clamp(48px, 9vw, 96px) 0;
-  }
-  .hero-inner { width: 100%; }
-  h1 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(38px, 7vw, 62px);
-    line-height: 1.02;
-    letter-spacing: -0.01em;
-    margin: 0;
-    text-wrap: balance;
-    max-width: 14ch;
-  }
-  .sub {
-    font-size: clamp(17px, 2.4vw, 20px);
-    line-height: 1.55;
-    color: var(--band-soft);
-    max-width: 40ch;
-    margin: 22px 0 0;
-  }
-  .meta-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px 16px;
-    margin-top: 26px;
-  }
-  .status-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    border: 1px solid var(--band-line);
-    border-radius: 999px;
-    padding: 5px 12px 5px 9px;
-    white-space: nowrap;
-  }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--status-good); flex: none; }
-  .founders { font-family: var(--font-mono); font-size: 12px; color: var(--band-soft); }
+  h1, h2 { font-family: var(--font-display); font-weight: 800; text-wrap: balance; margin: 0; }
 
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  /* ---------- hero ---------- */
+  .hero-name { font-size: clamp(42px, 8vw, 72px); line-height: 0.98; letter-spacing: -0.005em; }
+  .hero-name .line2 { color: var(--band-accent); }
+  .hero-sub {
+    font-size: clamp(17px, 2.2vw, 19px); line-height: 1.55; color: var(--band-soft);
+    max-width: 44ch; margin: 22px 0 0;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
   .btn-primary, .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 14px 24px;
-    border: 1px solid transparent;
-    transition: opacity 0.15s ease, border-color 0.15s ease;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+    text-decoration: none; border-radius: 999px; padding: 13px 24px;
+    border: 1px solid transparent; transition: opacity 0.15s ease, border-color 0.15s ease;
   }
   .btn-primary { background: var(--band-accent); color: var(--band-accent-ink); }
   .btn-primary:hover { opacity: 0.88; }
   .btn-ghost { background: transparent; color: var(--band-ink); border-color: var(--band-line); }
   .btn-ghost:hover { border-color: var(--band-soft); }
 
-  .proof {
-    padding: 22px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .proof-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px 0;
-    font-family: var(--font-mono);
-    font-size: 12.5px;
-    color: var(--ink-soft);
-  }
-  .proof-row span { display: inline-flex; align-items: center; gap: 7px; }
-  .proof-row span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--status-good); flex: none; }
-  .proof-row .sep { color: var(--line); padding: 0 12px; }
-  .proof-row .sep::before { content: none; }
+  .pipeline { margin-top: clamp(40px, 7vw, 64px); border-top: 1px solid var(--band-line); padding-top: 28px; }
+  .pipeline-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--band-soft); margin-bottom: 18px; }
+  .pipeline-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .pipeline-step .num { font-family: var(--font-mono); font-size: 12px; color: var(--band-accent); }
+  .pipeline-step .label { font-family: var(--font-body); font-weight: 700; font-size: 14.5px; margin: 6px 0 3px; }
+  .pipeline-step .desc { font-size: 12.5px; color: var(--band-soft); line-height: 1.4; }
+  .pipeline-outcome { margin-top: 22px; font-family: var(--font-mono); font-size: 12.5px; color: var(--band-soft); }
+  .pipeline-outcome b { color: var(--band-ink); font-weight: 500; }
 
-  .close {
-    padding: clamp(40px, 8vw, 72px) 0;
+  /* ---------- section heads ---------- */
+  .section-head { max-width: 50ch; margin-bottom: clamp(28px, 5vw, 44px); }
+  .section-head h2 { font-size: clamp(26px, 4.2vw, 38px); line-height: 1.06; }
+  .section-head p { font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); max-width: 56ch; margin: 14px 0 0; }
+  .band .section-head p { color: var(--band-soft); }
+
+  /* ---------- pillars ---------- */
+  .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pillar-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: clamp(20px, 2.6vw, 26px); box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 10px;
   }
-  .close h2 {
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: clamp(28px, 5vw, 40px);
-    line-height: 1.05;
-    margin: 0;
-    text-wrap: balance;
+  .pillar-top { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+  .pillar-top .n { color: var(--ink-soft); }
+  .pillar-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(20px, 2.6vw, 24px); line-height: 1.05; }
+  .pillar-desc { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+  .pillar-link {
+    align-self: flex-start; font-family: var(--font-mono); font-size: 12.5px; font-weight: 500;
+    color: var(--accent); text-decoration: none; margin-top: 4px;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
   }
-  .close p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--band-soft);
-    max-width: 44ch;
-    margin: 14px 0 0;
-  }
-  .footer-rule { border: none; border-top: 1px solid var(--band-line); margin: 36px 0 22px; }
-  .footer-line {
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    color: var(--band-soft);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
+  .pillar-link:hover { border-bottom-color: var(--accent); }
+
+  /* ---------- audience ---------- */
+  .audience-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .audience-card { border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; background: var(--surface); }
+  .audience-card .label { font-family: var(--font-mono); font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .audience-card p { margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); }
+
+  /* ---------- tag cloud ---------- */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 10px; }
+  .tag-chip { font-family: var(--font-mono); font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 8px 16px; }
+  .tag-note { font-family: var(--font-mono); font-size: 12px; color: var(--ink-soft); margin-top: 18px; }
+
+  /* ---------- why tags ---------- */
+  .why-tags { display: flex; flex-wrap: wrap; gap: 10px; }
+  .why-chip { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--band-accent); background: transparent; border: 1px solid color-mix(in srgb, var(--band-accent) 45%, var(--band-line)); border-radius: 999px; padding: 8px 16px; }
+
+  /* ---------- footer / close ---------- */
+  .close-block h2 { font-size: clamp(30px, 5vw, 44px); line-height: 1.05; }
+  .close-block p { font-size: 17px; line-height: 1.6; color: var(--band-soft); max-width: 48ch; margin: 14px 0 0; }
+  .footer-rule { border: none; border-top: 1px solid var(--band-line); margin: clamp(40px, 7vw, 60px) 0 22px; }
+  .footer-line { font-family: var(--font-mono); font-size: 11.5px; color: var(--band-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 720px) {
+    .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
+    .pillars { grid-template-columns: 1fr; }
+    .audience-grid { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -218,35 +173,161 @@
 <body>
 
 <section class="band hero">
-  <div class="wrap hero-inner">
-    <div class="eyebrow">JEPRIS-P AI &middot; Process &amp; Automation Intelligence</div>
-    <h1>Need a website, software, or something automated?</h1>
-    <p class="sub">We build it &mdash; fast, direct, no account managers. Message us and tell us what you need.</p>
-    <div class="meta-row">
-      <span class="status-pill"><span class="dot"></span>Available for new projects</span>
-      <span class="founders">Jefrey Raj &amp; Priyanka</span>
-    </div>
+  <div class="wrap">
+    <div class="eyebrow">Websites &middot; Software &middot; Automation</div>
+    <h1 class="hero-name">Build what you need.<br><span class="line2">Automate what you don't.</span></h1>
+    <p class="hero-sub">JEPRIS-P AI designs and builds your website or software, then automates the busywork around it &mdash; so your business runs without you chasing it.</p>
     <div class="actions">
-      <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20page%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
-      <a class="btn-ghost" href="/">See our work &rarr;</a>
+      <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20page%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message on WhatsApp &rarr;</a>
+      <a class="btn-ghost" href="/">See our work</a>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipeline-eyebrow">Build Pipeline</div>
+      <div class="pipeline-steps">
+        <div class="pipeline-step">
+          <div class="num">01</div>
+          <div class="label">Talk</div>
+          <div class="desc">Tell us what you need</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="num">02</div>
+          <div class="label">Build</div>
+          <div class="desc">We design &amp; build it</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="num">03</div>
+          <div class="label">Launch</div>
+          <div class="desc">It goes live, fast</div>
+        </div>
+        <div class="pipeline-step">
+          <div class="num">04</div>
+          <div class="label">Automate</div>
+          <div class="desc">We wire up the busywork</div>
+        </div>
+      </div>
+      <div class="pipeline-outcome">Outcome &mdash; <b>a system that runs itself.</b></div>
     </div>
   </div>
 </section>
 
-<section class="proof">
+<section>
   <div class="wrap">
-    <div class="proof-row">
-      <span>Linux Server Health Dashboard</span><span class="sep">&middot;</span>
-      <span>Remote Desk (AnyDesk)</span><span class="sep">&middot;</span>
-      <span>Church Member Management System</span>
+    <div class="section-head" style="text-align:center; margin-left:auto; margin-right:auto;">
+      <div class="eyebrow" style="justify-content:center;">One Team</div>
+      <h2>Everything you need to ship, under one roof.</h2>
+      <p style="margin-left:auto; margin-right:auto;">Built by two people who design, build, and automate &mdash; not a queue of specialists passed between departments.</p>
     </div>
   </div>
 </section>
 
-<footer class="band close">
+<section class="tint">
   <div class="wrap">
-    <h2>Let's build it.</h2>
-    <p>Tell us what you're trying to solve, and we'll tell you honestly whether we can help.</p>
+    <div class="section-head">
+      <div class="eyebrow">What we build</div>
+      <h2>Three ways we help you ship.</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar-card">
+        <div class="pillar-top"><span class="n">01</span><span>Web &middot; Build</span></div>
+        <div class="pillar-name">JEPRIS-P Sites</div>
+        <p class="pillar-desc">Custom websites and landing pages, built fast and made to actually convert.</p>
+        <a class="pillar-link" href="https://wa.me/919789035749?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20a%20website." target="_blank" rel="noopener noreferrer">Start a site &rarr;</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-top"><span class="n">02</span><span>Software &middot; Create</span></div>
+        <div class="pillar-name">JEPRIS-P Software</div>
+        <p class="pillar-desc">Internal tools and dashboards, built around how your team actually works.</p>
+        <a class="pillar-link" href="https://wa.me/919789035749?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20some%20software." target="_blank" rel="noopener noreferrer">Build with us &rarr;</a>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-top"><span class="n">03</span><span>Automation &middot; Automate</span></div>
+        <div class="pillar-name">JEPRIS-P Automation</div>
+        <p class="pillar-desc">Bots and workflows that handle the repetitive stuff automatically.</p>
+        <a class="pillar-link" href="https://wa.me/919789035749?text=Hi%2C%20I%27d%20like%20to%20talk%20about%20automation." target="_blank" rel="noopener noreferrer">Automate with us &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">The JEPRIS-P idea</div>
+      <h2>Good software isn't handed off. It's built with you.</h2>
+      <p>We believe real results come from direct access to the people actually building &mdash; not a support ticket, not a project manager relaying messages, not a queue.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Who we help</div>
+      <h2>Built for people who need it done.</h2>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="label">Small Businesses</div>
+        <p>A website or system that finally fits how you work.</p>
+      </div>
+      <div class="audience-card">
+        <div class="label">Churches &amp; Communities</div>
+        <p>Member management and broadcast messaging, without needing an IT team.</p>
+      </div>
+      <div class="audience-card">
+        <div class="label">IT &amp; Ops Teams</div>
+        <p>Dashboards and monitoring for the infrastructure you already run.</p>
+      </div>
+      <div class="audience-card">
+        <div class="label">Founders &amp; Teams</div>
+        <p>The internal tool you've been meaning to build.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Services</div>
+      <h2>What can we build you?</h2>
+    </div>
+    <div class="tag-cloud">
+      <span class="tag-chip">Websites</span>
+      <span class="tag-chip">Landing Pages</span>
+      <span class="tag-chip">Dashboards</span>
+      <span class="tag-chip">Internal Software</span>
+      <span class="tag-chip">Automation Bots</span>
+      <span class="tag-chip">Server Monitoring</span>
+      <span class="tag-chip">Remote Access Tools</span>
+      <span class="tag-chip">WhatsApp Integrations</span>
+      <span class="tag-chip">AI Workflows</span>
+    </div>
+    <div class="tag-note">More, as JEPRIS-P AI grows.</div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why JEPRIS-P AI</div>
+      <h2>Not just another freelancer queue.</h2>
+      <p>We connect design, engineering, and automation under one roof &mdash; built and run by the same two people, start to finish.</p>
+    </div>
+    <div class="why-tags">
+      <span class="why-chip">Direct</span>
+      <span class="why-chip">Production-Grade</span>
+      <span class="why-chip">Fast Turnaround</span>
+      <span class="why-chip">No Middlemen</span>
+    </div>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="wrap close-block">
+    <h2>Ready to build?</h2>
+    <p>Tell us what you're trying to solve. We'll tell you honestly whether we can help.</p>
     <div class="actions">
       <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20page%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
       <a class="btn-ghost" href="mailto:jeprispai@gmail.com">jeprispai@gmail.com</a>

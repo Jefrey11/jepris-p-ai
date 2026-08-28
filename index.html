@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEPRIS-P AI &mdash; Process &amp; Automation Intelligence</title>
+<meta name="description" content="Freelance studio run by Jefrey Raj &amp; Priyanka. Custom websites, software, AI dashboards, and automation bots.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #EDF1F4;
+    --surface: #FFFFFF;
+    --surface-alt: #E3E9EE;
+    --ink: #16212C;
+    --ink-soft: #56646F;
+    --line: #CBD4DB;
+    --accent: #C9631A;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #F3E1CC;
+    --status-good: #2F7D4F;
+    --band-bg: #16212C;
+    --band-ink: #EDF1F4;
+    --band-soft: #95A2AD;
+    --band-line: rgba(237, 241, 244, 0.14);
+    --band-accent: #E8944F;
+    --band-accent-ink: #1A1006;
+    --shadow: 0 1px 2px rgba(15,23,31,0.05), 0 16px 32px -20px rgba(15,23,31,0.22);
+    --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --font-body: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10161D;
+      --surface: #161F29;
+      --surface-alt: #1D2733;
+      --ink: #E7ECF0;
+      --ink-soft: #93A1AC;
+      --line: #2A3744;
+      --accent: #E8944F;
+      --accent-ink: #1A1006;
+      --accent-soft: #3A2917;
+      --status-good: #4FAE72;
+      --band-bg: #E7ECF0;
+      --band-ink: #10161D;
+      --band-soft: #69747E;
+      --band-line: rgba(16, 22, 29, 0.14);
+      --band-accent: #C9631A;
+      --band-accent-ink: #FFFFFF;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 16px 32px -20px rgba(0,0,0,0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #10161D;
+    --surface: #161F29;
+    --surface-alt: #1D2733;
+    --ink: #E7ECF0;
+    --ink-soft: #93A1AC;
+    --line: #2A3744;
+    --accent: #E8944F;
+    --accent-ink: #1A1006;
+    --accent-soft: #3A2917;
+    --status-good: #4FAE72;
+    --band-bg: #E7ECF0;
+    --band-ink: #10161D;
+    --band-soft: #69747E;
+    --band-line: rgba(16, 22, 29, 0.14);
+    --band-accent: #C9631A;
+    --band-accent-ink: #FFFFFF;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 16px 32px -20px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wrap {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 6vw, 48px);
+  }
+
+  section, footer.band { padding: clamp(56px, 10vw, 104px) 0; }
+
+  .band {
+    background: var(--band-bg);
+    color: var(--band-ink);
+    background-image:
+      repeating-linear-gradient(0deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px);
+  }
+  .tint { background: var(--surface-alt); }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+  .band .eyebrow { color: var(--band-soft); }
+  .eyebrow::before {
+    content: "";
+    width: 14px;
+    height: 2px;
+    background: var(--accent);
+    display: inline-block;
+    flex: none;
+  }
+  .band .eyebrow::before { background: var(--band-accent); }
+
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  /* ---------- hero ---------- */
+  .hero-name {
+    font-size: clamp(46px, 9.5vw, 84px);
+    line-height: 0.92;
+    letter-spacing: -0.005em;
+  }
+  .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    color: var(--band-soft);
+    margin: 10px 0 0;
+  }
+  .hero-pitch {
+    font-size: clamp(19px, 2.8vw, 25px);
+    font-weight: 500;
+    line-height: 1.45;
+    max-width: 38ch;
+    margin: 28px 0 0;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 24px;
+  }
+  .founders {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--band-soft);
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--band-ink);
+    border: 1px solid var(--band-line);
+    border-radius: 999px;
+    padding: 5px 12px 5px 9px;
+    white-space: nowrap;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--status-good);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--status-good) 30%, transparent);
+    flex: none;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  /* ---------- buttons ---------- */
+  .btn-primary, .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 13px 22px;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--band-accent); color: var(--band-accent-ink); }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost { background: transparent; color: var(--band-ink); border-color: var(--band-line); }
+  .btn-ghost:hover { border-color: var(--band-soft); }
+
+  /* ---------- section heads ---------- */
+  .section-head { max-width: 46ch; margin-bottom: clamp(32px, 6vw, 52px); }
+  .section-head h2 { font-size: clamp(28px, 4.5vw, 40px); line-height: 1.05; }
+
+  /* ---------- services ---------- */
+  .svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .svc-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: clamp(22px, 3vw, 30px);
+    box-shadow: var(--shadow);
+  }
+  .svc-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .svc-icon svg { width: 24px; height: 24px; }
+  .svc-card h3 { font-family: var(--font-body); font-size: 17px; font-weight: 700; margin: 0 0 8px; }
+  .svc-card p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+  /* ---------- about ---------- */
+  .about-lede { font-size: clamp(17px, 2.2vw, 19px); line-height: 1.65; max-width: 62ch; margin: 0 0 clamp(32px, 6vw, 48px); }
+  .diff-list { display: flex; flex-direction: column; gap: 22px; }
+  .diff-row { display: flex; gap: 14px; align-items: flex-start; }
+  .diff-row .mark { width: 10px; height: 10px; background: var(--accent); border-radius: 2px; margin-top: 6px; flex: none; }
+  .diff-row h3 { font-family: var(--font-body); font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+  .diff-row p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; max-width: 52ch; }
+
+  /* ---------- work / projects ---------- */
+  .panel-list { display: flex; flex-direction: column; gap: 24px; }
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: clamp(22px, 3.5vw, 30px);
+    box-shadow: var(--shadow);
+    transition: transform 0.15s ease;
+  }
+  .panel:hover { transform: translateY(-2px); }
+  .panel-art { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; display: flex; justify-content: center; padding: 14px; }
+  .panel-art img { display: block; width: 100%; max-width: 320px; height: auto; border-radius: 3px; box-shadow: 0 1px 3px rgba(0,0,0,0.15); }
+  .tag {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .panel h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(23px, 4vw, 29px);
+    line-height: 1.05;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .panel h3 .muted { color: var(--ink-soft); font-weight: 600; }
+  .panel p { font-size: 16px; line-height: 1.65; max-width: 60ch; margin: 0; }
+  .tech-row { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.02em; color: var(--ink-soft); }
+  .tech-row span:not(:last-child)::after { content: " \00b7 "; }
+  .demo-link {
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+  .demo-link:hover { border-bottom-color: var(--accent); }
+
+  /* ---------- contact / footer band ---------- */
+  .contact-block h2 { font-size: clamp(30px, 5vw, 44px); line-height: 1.05; }
+  .contact-block p { font-size: 17px; line-height: 1.6; max-width: 50ch; margin: 16px 0 0; color: var(--band-soft); }
+  .footer-rule { border: none; border-top: 1px solid var(--band-line); margin: clamp(48px, 8vw, 72px) 0 28px; }
+  .footer-line {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--band-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 620px) {
+    .svc-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .band-hero { animation: rise 0.6s ease both; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .panel { transition: none; }
+  }
+
+  @media print {
+    @page { size: A4; margin: 14mm; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .panel, .svc-card, .band, .diff-row { break-inside: avoid; }
+    .band-hero { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<section class="band band-hero">
+  <div class="wrap">
+    <div class="eyebrow">Freelance Studio &middot; Tech, Web &amp; Automation</div>
+    <h1 class="hero-name">JEPRIS-P AI</h1>
+    <p class="brand-sub">Process &amp; Automation Intelligence</p>
+    <p class="hero-pitch">We design and build the software your business runs on &mdash; websites, dashboards, and the automation that keeps everything moving without you having to.</p>
+    <div class="hero-meta">
+      <span class="status-pill"><span class="dot"></span>Available for new projects</span>
+      <span class="founders">Jefrey Raj &amp; Priyanka</span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20portfolio%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
+      <a class="btn-ghost" href="#work">See our work &darr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="section-services">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">What we build</div>
+      <h2>Four ways we can help</h2>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card">
+        <span class="svc-icon"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="22" height="18" rx="2" stroke="currentColor" stroke-width="1.8"/><line x1="3" y1="10" x2="25" y2="10" stroke="currentColor" stroke-width="1.8"/><circle cx="6.5" cy="7.5" r="0.9" fill="currentColor"/><circle cx="9.5" cy="7.5" r="0.9" fill="currentColor"/><circle cx="12.5" cy="7.5" r="0.9" fill="currentColor"/></svg></span>
+        <h3>Websites</h3>
+        <p>Fast, custom-built sites that load quickly and are easy for you to update &mdash; no bloated page builders slowing things down.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 8 L4 14 L10 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 8 L24 14 L18 20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <h3>Software</h3>
+        <p>Internal tools and business software built around how your team actually works, not squeezed into a generic template.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="16" width="4" height="7" rx="1" fill="currentColor"/><rect x="12" y="10" width="4" height="13" rx="1" fill="currentColor"/><rect x="19" y="4" width="4" height="19" rx="1" fill="currentColor"/></svg></span>
+        <h3>AI Dashboards</h3>
+        <p>Real-time visibility into the numbers that matter &mdash; servers, operations, members, whatever you need to keep an eye on.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-icon"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 14 A8 8 0 1 1 14 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 3.3 L14 6 L11 8.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>
+        <h3>Automation Bots</h3>
+        <p>The repetitive stuff handled automatically &mdash; data entry, alerts, reports, reminders &mdash; so it happens without anyone chasing it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Why JEPRIS-P AI</div>
+      <h2>Small enough to move fast, serious enough to trust with production.</h2>
+    </div>
+    <p class="about-lede">JEPRIS-P AI is Jefrey Raj and Priyanka working directly with you &mdash; no account managers, no handoffs between teams. Every project on this page is a real system we built and still run ourselves, not a demo made to look good in a portfolio.</p>
+    <div class="diff-list">
+      <div class="diff-row">
+        <span class="mark"></span>
+        <div>
+          <h3>You talk to the people building it</h3>
+          <p>Every message goes straight to us, not a support queue.</p>
+        </div>
+      </div>
+      <div class="diff-row">
+        <span class="mark"></span>
+        <div>
+          <h3>Real systems, running today</h3>
+          <p>The dashboards on this page aren't mockups &mdash; they're live.</p>
+        </div>
+      </div>
+      <div class="diff-row">
+        <span class="mark"></span>
+        <div>
+          <h3>Fast turnaround over WhatsApp</h3>
+          <p>No lengthy proposals or procurement &mdash; just a conversation and a plan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-work" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Recent builds</div>
+      <h2>Real systems, not mockups</h2>
+    </div>
+    <div class="panel-list">
+
+      <article class="panel">
+        <div class="panel-art"><img src="linux.jpg" alt="Screenshot of the Linux Server Health Dashboard Metrics page showing CPU, RAM, and disk usage gauges and a 100% Excellent health badge" loading="lazy"></div>
+        <div>
+          <span class="tag">server.monitor</span>
+          <h3>Linux Server Health Dashboard</h3>
+        </div>
+        <p>A real-time monitoring dashboard for Linux servers &mdash; CPU, memory, disk, and network health at a glance, with alerts that catch trouble before it turns into downtime.</p>
+        <div class="tech-row"><span>Linux</span><span>Monitoring</span><span>Alerts</span></div>
+        <a class="demo-link" href="https://linux-server-dashboard-community.onrender.com/" target="_blank" rel="noopener noreferrer">Live demo &rarr;</a>
+      </article>
+
+      <article class="panel">
+        <div class="panel-art"><img src="remote.jpg" alt="Screenshot of the Remote app with a saved device, connect form, and activity log" loading="lazy"></div>
+        <div>
+          <span class="tag">remote.ops</span>
+          <h3>Remote Desk <span class="muted">(AnyDesk)</span></h3>
+        </div>
+        <p>A self-hosted remote-desktop tool built from scratch &mdash; Device ID + PIN pairing like AnyDesk, end-to-end TLS encryption, and a relay mode for connecting across different networks. Runs on Windows and Linux.</p>
+        <div class="tech-row"><span>Self-Hosted</span><span>Cross-Platform</span><span>TLS Encrypted</span></div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-art"><img src="cms.jpg" alt="Screenshot of the Church Member Management System dashboard showing member statistics" loading="lazy"></div>
+        <div>
+          <span class="tag">congregation.ops</span>
+          <h3>Church Member Management System</h3>
+        </div>
+        <p>A member management system built for churches &mdash; member records and attendance tracking, plus one-click WhatsApp broadcast messaging to reach the whole congregation instantly.</p>
+        <div class="tech-row"><span>Member Records</span><span>Attendance</span><span>WhatsApp Broadcast</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="wrap">
+    <div class="contact-block">
+      <div class="eyebrow">Let's talk</div>
+      <h2>Have something that needs building?</h2>
+      <p>Tell us what you're trying to solve &mdash; a slow website, a manual process eating your week, a dashboard you wish existed. We'll tell you honestly whether we can help.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20portfolio%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+        <a class="btn-ghost" href="mailto:jeprispai@gmail.com">jeprispai@gmail.com</a>
+      </div>
+    </div>
+    <hr class="footer-rule">
+    <div class="footer-line">
+      <span>JEPRIS-P AI &middot; Process &amp; Automation Intelligence</span>
+      <span>Jefrey Raj &amp; Priyanka &middot; 2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

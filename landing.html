@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEPRIS-P AI &mdash; Let's Build It</title>
+<meta name="description" content="Websites, software, dashboards, and automation, built directly by Jefrey Raj & Priyanka. Message us on WhatsApp.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #EDF1F4;
+    --surface: #FFFFFF;
+    --ink: #16212C;
+    --ink-soft: #56646F;
+    --line: #CBD4DB;
+    --accent: #C9631A;
+    --status-good: #2F7D4F;
+    --band-bg: #16212C;
+    --band-ink: #EDF1F4;
+    --band-soft: #95A2AD;
+    --band-line: rgba(237, 241, 244, 0.14);
+    --band-accent: #E8944F;
+    --band-accent-ink: #1A1006;
+    --font-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    --font-body: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10161D;
+      --surface: #161F29;
+      --ink: #E7ECF0;
+      --ink-soft: #93A1AC;
+      --line: #2A3744;
+      --accent: #E8944F;
+      --status-good: #4FAE72;
+      --band-bg: #E7ECF0;
+      --band-ink: #10161D;
+      --band-soft: #69747E;
+      --band-line: rgba(16, 22, 29, 0.14);
+      --band-accent: #C9631A;
+      --band-accent-ink: #FFFFFF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10161D;
+    --surface: #161F29;
+    --ink: #E7ECF0;
+    --ink-soft: #93A1AC;
+    --line: #2A3744;
+    --accent: #E8944F;
+    --status-good: #4FAE72;
+    --band-bg: #E7ECF0;
+    --band-ink: #10161D;
+    --band-soft: #69747E;
+    --band-line: rgba(16, 22, 29, 0.14);
+    --band-accent: #C9631A;
+    --band-accent-ink: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 48px); width: 100%; }
+
+  .band {
+    background: var(--band-bg);
+    color: var(--band-ink);
+    background-image:
+      repeating-linear-gradient(0deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(90deg, var(--band-line), var(--band-line) 1px, transparent 1px, transparent 40px);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--band-soft);
+    margin: 0 0 20px;
+  }
+  .eyebrow::before { content: ""; width: 14px; height: 2px; background: var(--band-accent); display: inline-block; flex: none; }
+
+  .hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: clamp(48px, 9vw, 96px) 0;
+  }
+  .hero-inner { width: 100%; }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(38px, 7vw, 62px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+    max-width: 14ch;
+  }
+  .sub {
+    font-size: clamp(17px, 2.4vw, 20px);
+    line-height: 1.55;
+    color: var(--band-soft);
+    max-width: 40ch;
+    margin: 22px 0 0;
+  }
+  .meta-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-top: 26px;
+  }
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    border: 1px solid var(--band-line);
+    border-radius: 999px;
+    padding: 5px 12px 5px 9px;
+    white-space: nowrap;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--status-good); flex: none; }
+  .founders { font-family: var(--font-mono); font-size: 12px; color: var(--band-soft); }
+
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .btn-primary, .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 14px 24px;
+    border: 1px solid transparent;
+    transition: opacity 0.15s ease, border-color 0.15s ease;
+  }
+  .btn-primary { background: var(--band-accent); color: var(--band-accent-ink); }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-ghost { background: transparent; color: var(--band-ink); border-color: var(--band-line); }
+  .btn-ghost:hover { border-color: var(--band-soft); }
+
+  .proof {
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .proof-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 0;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .proof-row span { display: inline-flex; align-items: center; gap: 7px; }
+  .proof-row span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--status-good); flex: none; }
+  .proof-row .sep { color: var(--line); padding: 0 12px; }
+  .proof-row .sep::before { content: none; }
+
+  .close {
+    padding: clamp(40px, 8vw, 72px) 0;
+  }
+  .close h2 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.05;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .close p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--band-soft);
+    max-width: 44ch;
+    margin: 14px 0 0;
+  }
+  .footer-rule { border: none; border-top: 1px solid var(--band-line); margin: 36px 0 22px; }
+  .footer-line {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--band-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hero { animation: rise 0.55s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  }
+</style>
+</head>
+<body>
+
+<section class="band hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">JEPRIS-P AI &middot; Process &amp; Automation Intelligence</div>
+    <h1>Need a website, software, or something automated?</h1>
+    <p class="sub">We build it &mdash; fast, direct, no account managers. Message us and tell us what you need.</p>
+    <div class="meta-row">
+      <span class="status-pill"><span class="dot"></span>Available for new projects</span>
+      <span class="founders">Jefrey Raj &amp; Priyanka</span>
+    </div>
+    <div class="actions">
+      <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20page%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
+      <a class="btn-ghost" href="/">See our work &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section class="proof">
+  <div class="wrap">
+    <div class="proof-row">
+      <span>Linux Server Health Dashboard</span><span class="sep">&middot;</span>
+      <span>Remote Desk (AnyDesk)</span><span class="sep">&middot;</span>
+      <span>Church Member Management System</span>
+    </div>
+  </div>
+</section>
+
+<footer class="band close">
+  <div class="wrap">
+    <h2>Let's build it.</h2>
+    <p>Tell us what you're trying to solve, and we'll tell you honestly whether we can help.</p>
+    <div class="actions">
+      <a class="btn-primary" href="https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20page%20and%20wanted%20to%20talk%20about%20a%20project." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
+      <a class="btn-ghost" href="mailto:jeprispai@gmail.com">jeprispai@gmail.com</a>
+    </div>
+    <hr class="footer-rule">
+    <div class="footer-line">
+      <span>JEPRIS-P AI &middot; Process &amp; Automation Intelligence</span>
+      <span>Jefrey Raj &amp; Priyanka &middot; 2026</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

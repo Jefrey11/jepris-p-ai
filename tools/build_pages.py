@@ -16,7 +16,8 @@ def original(name):
 HEAD_EXTRA = ('<meta name="theme-color" content="#0D1017">\n'
               '<link rel="preload" as="image" href="' + RAW + 'poster.jpg">\n'
               '<link rel="stylesheet" href="/site.css">\n'
-              '<script src="/mascot.js" defer></script>')
+              '<script src="/mascot.js" defer></script>\n'
+              '<script src="/chat.js" defer></script>')
 
 BOT = ('<div class="hero-bot" data-sprite="' + RAW + 'poses.webp" aria-hidden="true">\n'
        '      <div class="bot-stage"><img src="' + RAW + 'poster.jpg" alt="" width="512" height="554"><canvas></canvas></div>\n'

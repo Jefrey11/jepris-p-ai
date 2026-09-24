@@ -241,3 +241,4 @@ footer.band { background: radial-gradient(50% 80% at 50% 115%, rgba(232,148,79,0
   .nav, .bot-hint { display: none; }
   .js .rv { opacity: 1; transform: none; }
 }
+@media (hover: none) { .bot-hint { display: none; } }

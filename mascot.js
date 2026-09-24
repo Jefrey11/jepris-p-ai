@@ -29,13 +29,13 @@
   /* robot */
   var box = document.querySelector('.hero-bot');
   if (!box || reduce) return;              /* reduced motion keeps the static poster */
-  var stage = box.querySelector('.bot-stage'), cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
+  var cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
   var P = {"frameW":512,"frameH":554,"cols":8,"count":45,"gaze":[[0.0,0.0],[-0.149,0.248],[-0.345,0.523],[-0.601,0.63],[-0.774,0.378],[-0.835,0.225],[-0.883,0.013],[-0.809,-0.16],[-0.811,-0.213],[-0.799,-0.247],[-0.784,-0.371],[-0.792,-0.322],[-0.798,-0.312],[-0.793,-0.353],[-0.81,-0.333],[-0.811,-0.324],[-0.938,-0.158],[-0.964,-0.058],[-0.997,0.393],[-0.939,0.839],[-0.882,0.949],[-0.715,0.614],[-0.587,0.13],[-0.443,0.291],[-0.228,0.261],[0.007,0.091],[0.162,0.119],[0.416,0.442],[0.682,0.585],[0.804,0.475],[0.983,0.195],[0.95,0.283],[0.718,0.366],[0.591,0.426],[0.28,0.417],[0.111,0.351],[-0.191,0.284],[-0.419,0.338],[-0.582,0.38],[-0.44,0.258],[-0.244,-0.51],[-0.183,-0.87],[-0.037,-0.127],[0.056,0.629],[0.001,-0.007]],"sourceFrames":[0,20,22,24,26,27,28,29,30,31,34,36,41,42,43,44,45,46,48,51,67,72,86,96,99,103,119,123,126,128,134,150,153,154,156,157,159,161,165,178,182,194,199,206,239],"anchor":{"x":0.4971,"y":0.3513}};
   var SKIP = [2, 3, 4, 20];                /* squint and blink frames */
   var path = [];                           /* usable sprite slots, in clip order */
   for (var i = 0; i < P.count; i++) if (SKIP.indexOf(i) < 0) path.push(i);
 
-  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lu = 0, lv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
+  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
   var img = new Image();
   img.decoding = 'async';
 
@@ -83,9 +83,6 @@
     if (fade < 1) slot(from, 1);
     slot(shown, fade < 1 ? fade : 1);
     ctx.globalAlpha = 1;
-    /* the clip barely nods, so vertical interest comes from a small lean */
-    lu += (tu - lu) * Math.min(1, dt * 5); lv += (tv - lv) * Math.min(1, dt * 5);
-    stage.style.transform = 'perspective(1100px) rotateX(' + (-lv * 7).toFixed(2) + 'deg) rotateY(' + (lu * 4).toFixed(2) + 'deg) translateY(' + (lv * 6).toFixed(1) + 'px)';
     requestAnimationFrame(frame);
   }
   function start() {

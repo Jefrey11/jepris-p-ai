@@ -29,13 +29,13 @@
   /* robot */
   var box = document.querySelector('.hero-bot');
   if (!box || reduce) return;              /* reduced motion keeps the static poster */
-  var stage = box.querySelector('.bot-stage'), cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
+  var cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
   var P = __POSES__;
   var SKIP = [2, 3, 4, 20];                /* squint and blink frames */
   var path = [];                           /* usable sprite slots, in clip order */
   for (var i = 0; i < P.count; i++) if (SKIP.indexOf(i) < 0) path.push(i);
 
-  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lu = 0, lv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
+  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
   var img = new Image();
   img.decoding = 'async';
 
@@ -83,9 +83,6 @@
     if (fade < 1) slot(from, 1);
     slot(shown, fade < 1 ? fade : 1);
     ctx.globalAlpha = 1;
-    /* the clip barely nods, so vertical interest comes from a small lean */
-    lu += (tu - lu) * Math.min(1, dt * 5); lv += (tv - lv) * Math.min(1, dt * 5);
-    stage.style.transform = 'perspective(1100px) rotateX(' + (-lv * 7).toFixed(2) + 'deg) rotateY(' + (lu * 4).toFixed(2) + 'deg) translateY(' + (lv * 6).toFixed(1) + 'px)';
     requestAnimationFrame(frame);
   }
   function start() {

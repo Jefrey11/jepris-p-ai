@@ -52,7 +52,7 @@
     box.classList.add('moved');
   }
   function score(k, u, v) {               /* P.look = measured pupil direction of each pose */
-    var g = P.look[path[k]], du = g[0] - u, dv = g[1] - v;
+    var g = P.look[path[k]], du = g[0] - u, dv = g[1] - 0.6 * v;   /* the clip's up/down eye range is small */
     return 1.6 * du * du + dv * dv;        /* left/right matters most: the clip has few up/down looks */
   }
   function bestIndex(u, v) {

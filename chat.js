@@ -5,7 +5,7 @@
   var WA_NUM = '919789035749';
   var EMAIL = 'jeprispai@gmail.com';
   var AVATAR = 'https://raw.githubusercontent.com/Jefrey11/jepris-p-ai/main/mascot/poster.jpg';
-  var KEY = 'jpa-chat-v1';
+  var KEY = 'jpa-chat-v2';
 
   function wa(text) { return 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent(text); }
   var WA_DEFAULT = wa('Hi, I saw your website and wanted to talk about a project.');
@@ -14,6 +14,8 @@
 
   /* ---------- knowledge: every answer is wording from index.html / landing.html ---------- */
   var K = [
+    { id: 'newproject', keys: ['new project', 'start a project', 'start project', 'make a project', 'make one project', 'one project', 'a project', 'my project', 'need a', 'need an', 'i need', 'we need', 'i want', 'we want', 'want to build', 'want a', 'build me', 'build my', 'make me', 'can you build', 'can you make', 'can you create', 'can you develop', 'create a', 'develop a', 'looking for', 'hire', 'get started', 'requirement', 'requirements', 'idea'], a: null, chips: null },
+
     { id: 'hello', keys: ['hi', 'hello', 'hey', 'hai', 'vanakkam', 'good morning', 'good evening', 'namaste'],
       a: 'Hi! I\'m the ' + NAME + '. I can tell you what we build, show you our recent projects, explain how we work, or connect you with Jefrey &amp; Priyanka directly.',
       chips: ['What do you build?', 'Show your projects', 'How do you work?', 'Contact you'] },
@@ -83,21 +85,21 @@
       a: '<b>Komang Bali</b>: a booking landing page for a private Bali driver and tour guide. 102 name-audited destinations across 13 real geographic areas, an interactive day-by-day itinerary builder, and 78 real location photos with proper attribution.<br><a href="https://komang-bali-landing.vercel.app/" target="_blank" rel="noopener noreferrer">Open the live demo &rarr;</a>',
       chips: ['Websites', 'Contact you'] },
 
-    { id: 'process', keys: ['process', 'how do you work', 'how does it work', 'steps', 'start', 'get started', 'begin', 'onboarding', 'proposal'],
+    { id: 'process', keys: ['process', 'how do you work', 'how does it work', 'steps', 'start', 'begin', 'onboarding', 'proposal'],
       a: 'A clear process, start to finish:<ol>' +
          '<li><b>Talk</b>: tell us what you\'re trying to solve. We\'ll follow up with a small design discussion.</li>' +
          '<li><b>Build</b>: we design and build it directly, the same two people, start to finish.</li>' +
          '<li><b>Launch</b>: it goes live, fast. You see progress in days, not months.</li>' +
          '<li><b>Automate</b>: we wire up the busywork around it, so it keeps running without you chasing it.</li></ol>',
-      chips: ['How long does it take?', 'How much does it cost?', 'Contact you'] },
+      chips: ['Start a project', 'How long does it take?', 'How much does it cost?'] },
 
     { id: 'time', keys: ['how long', 'timeline', 'time', 'deadline', 'fast', 'quick', 'turnaround', 'days', 'weeks', 'urgent', 'when'],
       a: 'Fast turnaround is how we work: conversations happen over WhatsApp, decisions happen fast, and you see progress in days, not months. The exact timeline depends on what you need, so the quickest way to get one is to tell us about your project.<br>' + btnWA,
-      chips: ['How do you work?', 'How much does it cost?'] },
+      chips: ['Start a project', 'How do you work?', 'How much does it cost?'] },
 
     { id: 'price', keys: ['price', 'pricing', 'cost', 'costs', 'budget', 'quote', 'quotation', 'rate', 'rates', 'charge', 'fee', 'fees', 'how much', 'expensive', 'cheap', 'affordable', 'payment', 'rupees', 'inr', 'usd', 'dollar'],
       a: 'We don\'t list fixed prices because every project is built around what you actually need. No lengthy proposals or procurement, just a conversation and a plan. Tell us what you\'re trying to solve and we\'ll tell you honestly whether we can help.<br>' + btnWA,
-      chips: ['How do you work?', 'Show your projects'] },
+      chips: ['Start a project', 'How do you work?', 'Show your projects'] },
 
     { id: 'about', keys: ['who', 'about', 'team', 'founder', 'founders', 'jefrey', 'priyanka', 'company', 'agency', 'freelance', 'freelancer', 'studio', 'people', 'you guys'],
       a: 'JEPRIS-P AI (Process &amp; Automation Intelligence) is <b>Jefrey Raj and Priyanka</b> working directly with you. No account managers, no handoffs between teams. Every project on our site is a real system we built and still run ourselves, not a demo made to look good in a portfolio.',
@@ -119,11 +121,11 @@
 
     { id: 'available', keys: ['available', 'availability', 'hiring', 'taking', 'new projects', 'free to', 'capacity'],
       a: 'Yes, we\'re <b>available for new projects</b>. Tell us what you\'re trying to solve.<br>' + btnWA,
-      chips: ['How do you work?'] },
+      chips: ['Start a project', 'How do you work?'] },
 
-    { id: 'contact', keys: ['contact', 'reach', 'talk', 'call', 'phone', 'number', 'whatsapp', 'email', 'mail', 'message', 'connect', 'hire', 'meeting', 'meet', 'speak'],
+    { id: 'contact', keys: ['contact', 'reach', 'talk', 'call', 'phone', 'number', 'whatsapp', 'email', 'mail', 'message', 'connect', 'meeting', 'meet', 'speak'],
       a: 'The fastest way is WhatsApp. Every message goes straight to Jefrey &amp; Priyanka, not a support queue. You can also email us.<br>' + btnWA + btnMail,
-      chips: ['How do you work?', 'Show your projects'] },
+      chips: ['Start a project', 'How do you work?', 'Show your projects'] },
 
     { id: 'thanks', keys: ['thanks', 'thank you', 'thank', 'ok', 'okay', 'great', 'cool', 'nice', 'bye', 'goodbye'],
       a: 'You\'re welcome! Whenever you\'re ready, message us and we\'ll take it from there.<br>' + btnWA,
@@ -133,23 +135,34 @@
     'What do you build?': 'services', 'Show your projects': 'projects', 'How do you work?': 'process', 'Contact you': 'contact',
     'Websites': 'web', 'Dashboards': 'software', 'Automation': 'automation', 'AI chatbots': 'ai', 'Deeper AI & engineering': 'deep',
     'Linux dashboard': 'linux', 'Remote Desk': 'remote', 'Church system': 'church', 'Komang Bali': 'bali',
-    'How long does it take?': 'time', 'How much does it cost?': 'price', 'Why choose you?': 'why'
+    'How long does it take?': 'time', 'How much does it cost?': 'price', 'Why choose you?': 'why', 'Start a project': 'newproject'
   };
-  var START = ['What do you build?', 'Show your projects', 'How much does it cost?', 'Contact you'];
+  var START = ['Start a project', 'What do you build?', 'Show your projects', 'How much does it cost?', 'Contact you'];
 
   var GENERIC = ['services', 'projects', 'about', 'fit'];
   function norm(s) { return ' ' + s.toLowerCase().replace(/[^a-z0-9/+\-\s]/g, ' ').replace(/\s+/g, ' ').trim() + ' '; }
+  function hits(k, t) {
+    var s = 0;
+    k.keys.forEach(function (w) {
+      var hit = w.indexOf(' ') >= 0 ? t.indexOf(' ' + w + ' ') >= 0 || t.indexOf(w) >= 0 : t.indexOf(' ' + w + ' ') >= 0 || t.indexOf(' ' + w + 's ') >= 0;
+      if (hit) s += w.indexOf(' ') >= 0 ? 2.5 : 1;     /* phrases beat single words */
+    });
+    return s;
+  }
+  var TYPE_OF = { web: 'Website', software: 'Software / dashboard', automation: 'Automation', ai: 'AI chatbot' };
+  function guessType(text) {                          /* "I need a website" -> Website */
+    var t = norm(text), best = null, bs = 0;
+    for (var id in TYPE_OF) { var s = hits(byId(id), t); if (s > bs) { bs = s; best = TYPE_OF[id]; } }
+    return best;
+  }
   function match(text) {
     var t = norm(text), best = null, bs = 0;
-    K.forEach(function (k, order) {
-      var s = 0;
-      k.keys.forEach(function (w) {
-        var hit = w.indexOf(' ') >= 0 ? t.indexOf(' ' + w + ' ') >= 0 || t.indexOf(w) >= 0 : t.indexOf(' ' + w + ' ') >= 0 || t.indexOf(' ' + w + 's ') >= 0;
-        if (hit) s += w.indexOf(' ') >= 0 ? 2.5 : 1;   /* phrases beat single words */
-      });
+    K.forEach(function (k) {
+      var s = hits(k, t);
       if (k.id === 'hello' || k.id === 'thanks') s *= 0.6; /* "hi, what does it cost?" should answer the cost */
       if (GENERIC.indexOf(k.id) >= 0) s *= 0.8;            /* "bali project" -> Bali, not the project list */
       if (k.id === 'price' || k.id === 'time') s *= 1.3;   /* "price for a mobile app" is a price question */
+      if (k.id === 'newproject') s *= 1.4;                 /* "I need to make one project" is a new lead, not the portfolio */
       if (s > bs) { bs = s; best = k; }
     });
     return best;
@@ -219,7 +232,7 @@
       '<button type="button" class="jpa-x" aria-label="Close chat">&times;</button></div>' +
       '<div class="jpa-log" role="log" aria-live="polite"></div>' +
       '<form class="jpa-form" autocomplete="off"><label class="sr" for="jpa-in" style="position:absolute;left:-9999px">Your question</label>' +
-      '<input id="jpa-in" class="jpa-in" type="text" maxlength="300" placeholder="Ask about services, projects, pricing...">' +
+      '<input id="jpa-in" class="jpa-in" type="text" maxlength="300" placeholder="Type your message...">' +
       '<button class="jpa-send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form>' +
       '<div class="jpa-note">Automated assistant &middot; answers come from this website</div>';
     document.body.appendChild(launch);
@@ -227,15 +240,18 @@
 
     var log = panel.querySelector('.jpa-log'), form = panel.querySelector('form'), input = panel.querySelector('.jpa-in');
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var history = [];
-    try { history = JSON.parse(sessionStorage.getItem(KEY) || '[]'); } catch (e) { history = []; }
-    function save() { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-40))); } catch (e) {} }
+    var history = [], flow = null, replaying = false;     /* history = what was shown; flow = project intake in progress */
+    try { history = JSON.parse(sessionStorage.getItem(KEY) || '[]'); flow = JSON.parse(sessionStorage.getItem(KEY + '-flow') || 'null'); } catch (e) { history = []; flow = null; }
+    function save() { try { sessionStorage.setItem(KEY, JSON.stringify(history.slice(-60))); sessionStorage.setItem(KEY + '-flow', JSON.stringify(flow)); } catch (e) {} }
+    function esc(x) { return String(x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 
     function scroll() { log.scrollTop = log.scrollHeight; }
     function addUser(text) {
+      if (!replaying) history.push({ r: 'me', t: text });
       var r = el('div', 'jpa-row me'), m = el('div', 'jpa-msg'); m.textContent = text; r.appendChild(m); log.appendChild(r); scroll();
     }
     function addBot(html, chips) {
+      if (!replaying) history.push({ r: 'bot', h: html, c: chips || [] });
       var r = el('div', 'jpa-row bot'); r.appendChild(el('span', 'jpa-av sm'));
       r.firstChild.setAttribute('aria-hidden', 'true');
       r.appendChild(el('div', 'jpa-msg', html)); log.appendChild(r);
@@ -251,13 +267,59 @@
       }
       scroll();
     }
+    /* ---------- "Start a project": 4 short questions, then one message to Jefrey & Priyanka ---------- */
+    var TYPES = ['Website', 'Software / dashboard', 'Automation', 'AI chatbot', 'Something else'];
+    var WHEN = ['As soon as possible', 'Within a month', 'Flexible / not sure'];
+    var ASK_ABOUT = 'What should it do, and who is it for? A sentence or two is enough.';
+    function startFlow(text, fromChip) {
+      var g = fromChip ? null : guessType(text);
+      flow = { step: g ? 'about' : 'type', type: g };
+      if (g) return { a: 'Yes, we can help with that! Let\'s get your <b>' + esc(g.toLowerCase()) + '</b> project to Jefrey &amp; Priyanka. Just 3 quick questions.<br><br>' + ASK_ABOUT, chips: ['Cancel'] };
+      return { a: 'Great, let\'s get your new project to Jefrey &amp; Priyanka. Just 4 quick questions.<br><br>First, what would you like us to build?', chips: TYPES.concat(['Cancel']) };
+    }
+    function flowStep(text) {
+      if (/^(cancel|stop|quit|exit|no thanks)$/i.test(text)) {
+        flow = null;
+        return { a: 'No problem, I\'ve cancelled that. Anything else I can help with?', chips: START };
+      }
+      if (flow.step === 'type') {
+        flow.type = text; flow.step = 'about';
+        return { a: 'Got it: <b>' + esc(text) + '</b>.<br><br>' + ASK_ABOUT, chips: ['Cancel'] };
+      }
+      if (flow.step === 'about') {
+        if (text.length < 4) return { a: 'Could you tell me a little more? ' + ASK_ABOUT, chips: ['Cancel'] };
+        flow.about = text; flow.step = 'when';
+        return { a: 'Thanks! Do you have a timeline in mind?', chips: WHEN.concat(['Cancel']) };
+      }
+      if (flow.step === 'when') {
+        flow.when = text; flow.step = 'name';
+        return { a: 'Last one: what\'s your name? Add your business name too, if you have one.', chips: ['Cancel'] };
+      }
+      /* name -> summary, ready to send */
+      var f = flow; f.name = text; flow = null;
+      var msg = 'Hi JEPRIS-P AI, I\'d like to start a new project.\n\n' +
+        'Name: ' + f.name + '\nProject type: ' + f.type + '\nDetails: ' + f.about + '\nTimeline: ' + f.when +
+        '\n\n(Sent from the JEPRIS-P AI Assistant on your website)';
+      var mail = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('New project: ' + f.type) + '&body=' + encodeURIComponent(msg);
+      return {
+        a: 'Thanks, ' + esc(f.name) + '! Here\'s your project summary:<ul>' +
+           '<li><b>Type:</b> ' + esc(f.type) + '</li><li><b>Details:</b> ' + esc(f.about) + '</li><li><b>Timeline:</b> ' + esc(f.when) + '</li></ul>' +
+           'Tap a button to send it. It goes straight to Jefrey &amp; Priyanka, who will reply to you directly. Nothing is sent until you tap.<br>' +
+           '<a class="jpa-cta" href="' + wa(msg) + '" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a>' +
+           '<a class="jpa-cta ghost" href="' + mail + '">Send by email</a>',
+        chips: ['Start a project', 'Show your projects']
+      };
+    }
     function answerFor(text, id) {
+      if (flow && !id) return flowStep(text);
+      if (flow && id) flow = null;                    /* an older chip was tapped: leave the intake */
       var k = id ? byId(id) : match(text);
+      if (k && k.id === 'newproject') return startFlow(text, !!id);
       if (k) return { a: k.a, chips: k.chips };
       return {
         a: 'I\'m a simple assistant, so I can only answer from what\'s on this website, and I don\'t have an answer for that one. Jefrey &amp; Priyanka can answer it directly:<br>' +
            '<a class="jpa-cta" href="' + wa('Hi, I have a question from your website: ' + text) + '" target="_blank" rel="noopener noreferrer">Ask on WhatsApp</a>' + btnMail,
-        chips: ['What do you build?', 'Show your projects', 'How do you work?']
+        chips: ['Start a project', 'What do you build?', 'Show your projects']
       };
     }
     var busy = false;
@@ -267,18 +329,18 @@
       busy = true;
       addUser(text);
       var ans = answerFor(text, id);
-      history.push({ me: text, id: id || null });
-      save();
       var t = el('div', 'jpa-row bot', '<span class="jpa-av sm" aria-hidden="true"></span><div class="jpa-msg jpa-typing" aria-label="typing"><i></i><i></i><i></i></div>');
       log.appendChild(t); scroll();
-      setTimeout(function () { t.remove(); addBot(ans.a, ans.chips); busy = false; }, reduce ? 0 : 450 + Math.min(500, text.length * 8));
+      setTimeout(function () { t.remove(); addBot(ans.a, ans.chips); save(); busy = false; }, reduce ? 0 : 450 + Math.min(500, text.length * 8));
     }
     function greet() {
-      addBot('Hi! I\'m the <b>' + NAME + '</b>. Ask me what we build, see our recent projects, or find out how to start a project with Jefrey &amp; Priyanka.', START);
+      addBot('Hi! I\'m the <b>' + NAME + '</b>. Tell me about a project you\'d like built, ask what we do, or see our recent work.', START);
+      save();
     }
-    function replay() {                       /* restore this tab's conversation without the typing delay */
-      greet();
-      history.forEach(function (h) { addUser(h.me); var a = answerFor(h.me, h.id); addBot(a.a, a.chips); });
+    function replay() {                       /* restore this tab's conversation exactly as it was shown */
+      replaying = true;
+      history.forEach(function (h) { if (h.r === 'me') addUser(h.t); else addBot(h.h, h.c); });
+      replaying = false;
     }
 
     var started = false;

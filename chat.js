@@ -165,7 +165,7 @@
     '.jpa-av.sm{width:32px;height:32px}',
     '.jpa-launch .jpa-av::after{content:"";position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;background:#4FC27F;border:2px solid #121621}',
     '.jpa-launch.open{opacity:0;pointer-events:none;transform:scale(.9)}',
-    '.jpa-panel{position:fixed;right:20px;bottom:20px;z-index:91;width:min(390px,calc(100vw - 32px));height:min(600px,calc(100vh - 40px));display:flex;flex-direction:column;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,18,27,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 50px -20px rgba(232,148,79,.45);color:#ECEEF3;font-family:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;transform-origin:100% 100%;transition:opacity .22s ease,transform .22s ease}',
+    '.jpa-panel{position:fixed;padding:0;margin:0;right:20px;bottom:20px;z-index:91;width:min(390px,calc(100vw - 32px));height:min(600px,calc(100vh - 40px));display:flex;flex-direction:column;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:rgba(15,18,27,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 30px 80px -20px rgba(0,0,0,.9),0 0 50px -20px rgba(232,148,79,.45);color:#ECEEF3;font-family:"IBM Plex Sans",-apple-system,"Segoe UI",sans-serif;transform-origin:100% 100%;transition:opacity .22s ease,transform .22s ease}',
     '.jpa-panel[hidden]{display:flex;opacity:0;transform:translateY(12px) scale(.97);pointer-events:none;visibility:hidden}',
     '.jpa-head{display:flex;align-items:center;gap:11px;padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(56,56,80,.55),rgba(56,56,80,0))}',
     '.jpa-title{font:800 19px/1 "Big Shoulders Display","Arial Narrow",sans-serif;letter-spacing:.01em}',
@@ -209,7 +209,7 @@
     launch.type = 'button';
     launch.setAttribute('aria-haspopup', 'dialog');
 
-    var panel = el('section', 'jpa-panel');
+    var panel = el('div', 'jpa-panel');   /* not <section>: the site pads every section */
     panel.hidden = true;
     panel.setAttribute('role', 'dialog');
     panel.setAttribute('aria-label', NAME);

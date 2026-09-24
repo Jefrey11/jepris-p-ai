@@ -35,7 +35,7 @@
   var path = [];                           /* usable sprite slots, in clip order */
   for (var i = 0; i < P.count; i++) if (SKIP.indexOf(i) < 0) path.push(i);
 
-  var head = 0, tu = 0, tv = 0, lu = 0, lv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
+  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lu = 0, lv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
   var img = new Image();
   img.decoding = 'async';
 
@@ -51,13 +51,13 @@
     lastInput = performance.now();
     box.classList.add('moved');
   }
+  function score(k, u, v) {
+    var g = P.gaze[path[k]], du = g[0] - u, dv = g[1] - v;
+    return du * du + 0.12 * dv * dv + 0.003 * Math.abs(k - head);
+  }
   function bestIndex(u, v) {               /* pose that matches the gaze, preferring ones near the playhead */
-    var bi = 0, bs = 1e9;
-    for (var k = 0; k < path.length; k++) {
-      var g = P.gaze[path[k]], du = g[0] - u, dv = g[1] - v;
-      var s = du * du + 0.12 * dv * dv + 0.003 * Math.abs(k - head);
-      if (s < bs) { bs = s; bi = k; }
-    }
+    var bi = goal, bs = score(goal, u, v) - 0.01;   /* small hysteresis so it does not flicker */
+    for (var k = 0; k < path.length; k++) { var s = score(k, u, v); if (s < bs) { bs = s; bi = k; } }
     return bi;
   }
   function slot(k, a) {
@@ -72,14 +72,16 @@
       var s = t / 1000;
       tu = 0.85 * Math.sin(s * 0.42); tv = 0.3 * Math.sin(s * 0.63 + 1.3);
     }
-    var diff = bestIndex(tu, tv) - head;
-    var speed = Math.min(22, 2 + Math.abs(diff) * 5);        /* poses per second */
+    goal = bestIndex(tu, tv);
+    var diff = goal - head;
+    var speed = Math.min(20, 3 + Math.abs(diff) * 4);        /* poses per second, walking the clip */
     head += Math.sign(diff) * Math.min(Math.abs(diff), speed * dt);
-    var k = Math.floor(head), f = head - k, k2 = Math.min(path.length - 1, k + 1);
-    var near = Math.abs(P.sourceFrames[path[k2]] - P.sourceFrames[path[k]]) <= 16;
+    var k = Math.round(head);
+    if (k !== shown) { from = shown; shown = k; fade = 0; }
+    fade = Math.min(1, fade + dt / 0.09);                     /* short cross-fade between whole poses */
     ctx.clearRect(0, 0, cv.width, cv.height);
-    if (near) { slot(k, 1); if (f > 0.02) slot(k2, f); }
-    else slot(f < 0.5 ? k : k2, 1);       /* never blend far-apart poses, they ghost */
+    if (fade < 1) slot(from, 1);
+    slot(shown, fade < 1 ? fade : 1);
     ctx.globalAlpha = 1;
     /* the clip barely nods, so vertical interest comes from a small lean */
     lu += (tu - lu) * Math.min(1, dt * 5); lv += (tv - lv) * Math.min(1, dt * 5);

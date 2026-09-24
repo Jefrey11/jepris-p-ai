@@ -35,7 +35,7 @@
   var path = [];                           /* usable sprite slots, in clip order */
   for (var i = 0; i < P.count; i++) if (SKIP.indexOf(i) < 0) path.push(i);
 
-  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
+  var goal = 0, shown = 0, from = 0, fade = 1, dur = 0.1, tu = 0, tv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
   var img = new Image();
   img.decoding = 'async';
 
@@ -51,12 +51,12 @@
     lastInput = performance.now();
     box.classList.add('moved');
   }
-  function score(k, u, v) {
-    var g = P.gaze[path[k]], du = g[0] - u, dv = g[1] - v;
-    return du * du + 0.12 * dv * dv + 0.003 * Math.abs(k - head);
+  function score(k, u, v) {               /* P.look = measured pupil direction of each pose */
+    var g = P.look[path[k]], du = g[0] - u, dv = g[1] - v;
+    return 1.6 * du * du + dv * dv;        /* left/right matters most: the clip has few up/down looks */
   }
-  function bestIndex(u, v) {               /* pose that matches the gaze, preferring ones near the playhead */
-    var bi = goal, bs = score(goal, u, v) - 0.01;   /* small hysteresis so it does not flicker */
+  function bestIndex(u, v) {
+    var bi = goal, bs = score(goal, u, v) - 0.03;   /* hysteresis so it does not flicker */
     for (var k = 0; k < path.length; k++) { var s = score(k, u, v); if (s < bs) { bs = s; bi = k; } }
     return bi;
   }
@@ -73,12 +73,11 @@
       tu = 0.85 * Math.sin(s * 0.42); tv = 0.3 * Math.sin(s * 0.63 + 1.3);
     }
     goal = bestIndex(tu, tv);
-    var diff = goal - head;
-    var speed = Math.min(20, 3 + Math.abs(diff) * 4);        /* poses per second, walking the clip */
-    head += Math.sign(diff) * Math.min(Math.abs(diff), speed * dt);
-    var k = Math.round(head);
-    if (k !== shown) { from = shown; shown = k; fade = 0; }
-    fade = Math.min(1, fade + dt / 0.09);                     /* short cross-fade between whole poses */
+    if (fade >= 1 && shown !== goal) {     /* short hops play the clip; long ones cut straight to the pose */
+      var d = goal - shown, near = Math.abs(d) <= 3;
+      from = shown; shown = near ? shown + Math.sign(d) : goal; fade = 0; dur = near ? 0.06 : 0.14;
+    }
+    fade = Math.min(1, fade + dt / dur);
     ctx.clearRect(0, 0, cv.width, cv.height);
     if (fade < 1) slot(from, 1);
     slot(shown, fade < 1 ? fade : 1);

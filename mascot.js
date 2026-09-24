@@ -30,12 +30,12 @@
   var box = document.querySelector('.hero-bot');
   if (!box || reduce) return;              /* reduced motion keeps the static poster */
   var cv = box.querySelector('canvas'), ctx = cv.getContext('2d');
-  var P = {"frameW":512,"frameH":554,"cols":8,"count":45,"gaze":[[0.0,0.0],[-0.149,0.248],[-0.345,0.523],[-0.601,0.63],[-0.774,0.378],[-0.835,0.225],[-0.883,0.013],[-0.809,-0.16],[-0.811,-0.213],[-0.799,-0.247],[-0.784,-0.371],[-0.792,-0.322],[-0.798,-0.312],[-0.793,-0.353],[-0.81,-0.333],[-0.811,-0.324],[-0.938,-0.158],[-0.964,-0.058],[-0.997,0.393],[-0.939,0.839],[-0.882,0.949],[-0.715,0.614],[-0.587,0.13],[-0.443,0.291],[-0.228,0.261],[0.007,0.091],[0.162,0.119],[0.416,0.442],[0.682,0.585],[0.804,0.475],[0.983,0.195],[0.95,0.283],[0.718,0.366],[0.591,0.426],[0.28,0.417],[0.111,0.351],[-0.191,0.284],[-0.419,0.338],[-0.582,0.38],[-0.44,0.258],[-0.244,-0.51],[-0.183,-0.87],[-0.037,-0.127],[0.056,0.629],[0.001,-0.007]],"sourceFrames":[0,20,22,24,26,27,28,29,30,31,34,36,41,42,43,44,45,46,48,51,67,72,86,96,99,103,119,123,126,128,134,150,153,154,156,157,159,161,165,178,182,194,199,206,239],"anchor":{"x":0.4971,"y":0.3513}};
+  var P = {"frameW":512,"frameH":554,"cols":8,"count":45,"gaze":[[0.0,0.0],[-0.149,0.248],[-0.345,0.523],[-0.601,0.63],[-0.774,0.378],[-0.835,0.225],[-0.883,0.013],[-0.809,-0.16],[-0.811,-0.213],[-0.799,-0.247],[-0.784,-0.371],[-0.792,-0.322],[-0.798,-0.312],[-0.793,-0.353],[-0.81,-0.333],[-0.811,-0.324],[-0.938,-0.158],[-0.964,-0.058],[-0.997,0.393],[-0.939,0.839],[-0.882,0.949],[-0.715,0.614],[-0.587,0.13],[-0.443,0.291],[-0.228,0.261],[0.007,0.091],[0.162,0.119],[0.416,0.442],[0.682,0.585],[0.804,0.475],[0.983,0.195],[0.95,0.283],[0.718,0.366],[0.591,0.426],[0.28,0.417],[0.111,0.351],[-0.191,0.284],[-0.419,0.338],[-0.582,0.38],[-0.44,0.258],[-0.244,-0.51],[-0.183,-0.87],[-0.037,-0.127],[0.056,0.629],[0.001,-0.007]],"sourceFrames":[0,20,22,24,26,27,28,29,30,31,34,36,41,42,43,44,45,46,48,51,67,72,86,96,99,103,119,123,126,128,134,150,153,154,156,157,159,161,165,178,182,194,199,206,239],"anchor":{"x":0.4971,"y":0.3513},"look":[[-0.039,-0.121],[-1,0.154],[-0.633,0.197],[0.431,0.903],[-1,0.313],[-1,0.092],[-1,0.101],[-0.951,0.106],[-0.943,0.073],[-0.931,0.072],[-0.908,0.078],[-0.907,0.085],[-0.926,0.093],[-0.924,0.057],[-0.97,0.078],[-0.94,0.098],[-0.914,0.19],[-0.884,0.329],[-0.681,0.602],[-0.4,0.788],[-0.504,0.496],[-1,0.222],[-1,0.105],[0.016,-0.039],[0.031,-0.034],[0.031,-0.013],[0.909,-0.246],[0.957,-0.184],[0.932,-0.183],[0.961,-0.17],[0.949,-0.121],[0.888,-0.101],[0.342,0.16],[0.149,0.283],[-0.067,0.448],[-0.099,0.453],[-0.119,0.45],[-0.135,0.446],[-0.127,0.444],[0.685,-0.548],[0.819,-0.68],[0.836,-0.673],[0.427,-0.118],[-0.002,0.255],[-0.018,-0.11]]};
   var SKIP = [2, 3, 4, 20];                /* squint and blink frames */
   var path = [];                           /* usable sprite slots, in clip order */
   for (var i = 0; i < P.count; i++) if (SKIP.indexOf(i) < 0) path.push(i);
 
-  var head = 0, goal = 0, shown = 0, from = 0, fade = 1, tu = 0, tv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
+  var goal = 0, shown = 0, from = 0, fade = 1, dur = 0.1, tu = 0, tv = 0, lastInput = -1e9, visible = true, running = false, prev = 0;
   var img = new Image();
   img.decoding = 'async';
 
@@ -51,12 +51,12 @@
     lastInput = performance.now();
     box.classList.add('moved');
   }
-  function score(k, u, v) {
-    var g = P.gaze[path[k]], du = g[0] - u, dv = g[1] - v;
-    return du * du + 0.12 * dv * dv + 0.003 * Math.abs(k - head);
+  function score(k, u, v) {               /* P.look = measured pupil direction of each pose */
+    var g = P.look[path[k]], du = g[0] - u, dv = g[1] - v;
+    return 1.6 * du * du + dv * dv;        /* left/right matters most: the clip has few up/down looks */
   }
-  function bestIndex(u, v) {               /* pose that matches the gaze, preferring ones near the playhead */
-    var bi = goal, bs = score(goal, u, v) - 0.01;   /* small hysteresis so it does not flicker */
+  function bestIndex(u, v) {
+    var bi = goal, bs = score(goal, u, v) - 0.03;   /* hysteresis so it does not flicker */
     for (var k = 0; k < path.length; k++) { var s = score(k, u, v); if (s < bs) { bs = s; bi = k; } }
     return bi;
   }
@@ -73,12 +73,11 @@
       tu = 0.85 * Math.sin(s * 0.42); tv = 0.3 * Math.sin(s * 0.63 + 1.3);
     }
     goal = bestIndex(tu, tv);
-    var diff = goal - head;
-    var speed = Math.min(20, 3 + Math.abs(diff) * 4);        /* poses per second, walking the clip */
-    head += Math.sign(diff) * Math.min(Math.abs(diff), speed * dt);
-    var k = Math.round(head);
-    if (k !== shown) { from = shown; shown = k; fade = 0; }
-    fade = Math.min(1, fade + dt / 0.09);                     /* short cross-fade between whole poses */
+    if (fade >= 1 && shown !== goal) {     /* short hops play the clip; long ones cut straight to the pose */
+      var d = goal - shown, near = Math.abs(d) <= 3;
+      from = shown; shown = near ? shown + Math.sign(d) : goal; fade = 0; dur = near ? 0.06 : 0.14;
+    }
+    fade = Math.min(1, fade + dt / dur);
     ctx.clearRect(0, 0, cv.width, cv.height);
     if (fade < 1) slot(from, 1);
     slot(shown, fade < 1 ? fade : 1);

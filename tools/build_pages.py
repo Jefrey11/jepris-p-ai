@@ -3,7 +3,7 @@ import re, subprocess, sys, html as H
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent  # repo root
-RAW = "https://raw.githubusercontent.com/Jefrey11/jepris-p-ai/mascot-hero/mascot/"
+RAW = "https://raw.githubusercontent.com/Jefrey11/jepris-p-ai/main/mascot/"
 WA = "https://wa.me/919789035749?text=Hi%2C%20I%20saw%20your%20{w}%20and%20wanted%20to%20talk%20about%20a%20project."
 
 # mascot.js = template + pose data
@@ -11,7 +11,7 @@ tpl = (SITE / "tools" / "mascot.js.tpl").read_text(encoding="utf-8")
 (SITE / "mascot.js").write_text(tpl.replace("__POSES__", (SITE / "tools" / "poses.min.json").read_text()), encoding="utf-8")
 
 def original(name):
-    return subprocess.run(["git", "-C", str(SITE), "show", f"main:{name}"], capture_output=True, text=True, encoding="utf-8", check=True).stdout
+    return subprocess.run(["git", "-C", str(SITE), "show", f"00c0d72:{name}"], capture_output=True, text=True, encoding="utf-8", check=True).stdout
 
 HEAD_EXTRA = ('<meta name="theme-color" content="#0D1017">\n'
               '<link rel="preload" as="image" href="' + RAW + 'poster.jpg">\n'
